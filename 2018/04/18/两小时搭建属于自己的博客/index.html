@@ -145,7 +145,7 @@
 <meta property="og:image" content="https://liubenwang.github.io/2018/04/18/两小时搭建属于自己的博客/repo_settings.png">
 <meta property="og:image" content="https://liubenwang.github.io/2018/04/18/两小时搭建属于自己的博客/github_page.png">
 <meta property="og:image" content="https://liubenwang.github.io/2018/04/18/两小时搭建属于自己的博客/run_server.png">
-<meta property="og:updated_time" content="2018-04-26T08:47:45.353Z">
+<meta property="og:updated_time" content="2018-04-26T08:59:45.902Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="两小时搭建属于自己的博客">
 <meta name="twitter:description" content="如果你想搭建一个与本站一模一样的博客，看这篇文章就对了！！这篇文章将介绍如何零成本快速搭建属于自己的博客，包括如何搭建Hexo环境、如何使用NexT配置主题样式、如何进行个性样式的修改以及过程中可能遇到的问题和解决办法，希望能帮助到大家！">
@@ -230,7 +230,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">身体还在沉睡，而灵魂已经苏醒</p>
+        <h1 class="site-subtitle" itemprop="description">身体还在沉睡，而灵魂已经苏醒</h1>
       
   </div>
 
@@ -383,7 +383,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">两小时搭建属于自己的博客</h1>
+          <h2 class="post-title" itemprop="name headline">两小时搭建属于自己的博客</h2>
         
 
         <div class="post-meta">
@@ -470,7 +470,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4,901
+                  4,970
                 </span>
               
 
@@ -534,7 +534,9 @@
 <p>新建完成后，指定文件夹的目录如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
 <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>在_config.yml文件中配置网站的配置信息，在此仅介绍稍后会用到的配置选项，<strong>在所有的冒号:后边都要加一个空格，否则执行hexo命令会报错</strong></p>
-<h4 id="Site"><a href="#Site" class="headerlink" title="Site"></a>Site</h4><table>
+<p><strong>网页配置</strong></p>
+<p>搜索<code>site</code>进行网页配置</p>
+<table>
 <thead>
 <tr>
 <th style="text-align:left">参数</th>
@@ -564,7 +566,9 @@
 </tr>
 </tbody>
 </table>
-<h4 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h4><table>
+<p><strong>链接配置</strong></p>
+<p>搜索<code>url</code>进行链接配置，用于在保存网址时使用，建议设置为首页网址，如：在浏览器保存网址或添加书签，如不设置此选项，则保存的网址是错误的</p>
+<table>
 <thead>
 <tr>
 <th>参数</th>
@@ -585,11 +589,12 @@
 </tr>
 </tbody>
 </table>
-<p><code>url</code>：用于在保存网址时使用，建议设置为首页网址，如：在浏览器保存网址或添加书签，如不设置此选项，则保存的网址是错误的</p>
 <blockquote>
 <p>如果您的网站存放在子目录中，例如 <code>http://yoursite.com/blog</code>，则请将您的 <code>url</code> 设为 <code>http://yoursite.com/blog</code> 并把 <code>root</code> 设为 <code>/blog/</code>。</p>
 </blockquote>
-<h4 id="Writing"><a href="#Writing" class="headerlink" title="Writing"></a>Writing</h4><table>
+<p><strong>写作配置</strong></p>
+<p>搜索<code>wirting</code>进行写作设置，主要用于编辑文章</p>
+<table>
 <thead>
 <tr>
 <th>参数</th>
@@ -623,7 +628,9 @@
 <p><code>render_drafts</code>：后续会用到，建议开启，用于在本地预览时显示草稿内容</p>
 <p><code>post_asset_folder</code>：后续会用到，建议开启，用于在编辑内容时提供资源，如：插入图片时提供图片；开启后会在使用<code>hexo new &quot;file&quot;</code>命令创建新文件时自动创建同名的文件夹用来存放资源</p>
 <p><code>highlight</code>：代码块设置，建议开启</p>
-<h4 id="Extensions"><a href="#Extensions" class="headerlink" title="Extensions"></a>Extensions</h4><table>
+<p><strong>拓展设置</strong></p>
+<p>搜索<code>extensions</code>进行拓展设置，非常重要，用于启动主题和部署服务器</p>
+<table>
 <thead>
 <tr>
 <th>参数</th>
@@ -647,7 +654,7 @@
 <blockquote>
 <p><strong>repo填写上述创建的GitHub Page网址</strong></p>
 </blockquote>
-<h3 id="检验初步成果"><a href="#检验初步成果" class="headerlink" title="检验初步成果"></a>检验初步成果</h3><h4 id="创建新文件"><a href="#创建新文件" class="headerlink" title="创建新文件"></a>创建新文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new &quot;My New Post&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="检验成果"><a href="#检验成果" class="headerlink" title="检验成果"></a>检验成果</h3><h4 id="创建新文件"><a href="#创建新文件" class="headerlink" title="创建新文件"></a>创建新文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new &quot;My New Post&quot;</span><br></pre></td></tr></table></figure>
 <h4 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate # 或 hexo g</span><br></pre></td></tr></table></figure>
 <h4 id="运行本地服务器"><a href="#运行本地服务器" class="headerlink" title="运行本地服务器"></a>运行本地服务器</h4><p>先安装插件才能使用，执行以下命令安装插件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-server --save</span><br></pre></td></tr></table></figure>
@@ -873,6 +880,22 @@
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/27/Tornado/" rel="prev" title="Tornado">
+                Tornado <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
 
       
       
@@ -942,7 +965,7 @@
                 alt="benwang" />
             
               <p class="site-author-name" itemprop="name">benwang</p>
-              <p class="site-description motion-element" itemprop="description">iOS | Swift | Python</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
           <nav class="site-state motion-element">
@@ -952,7 +975,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -963,7 +986,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -974,7 +997,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1060,7 +1083,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Homebrew"><span class="nav-number">1.1.</span> <span class="nav-text">安装Homebrew</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Git"><span class="nav-number">1.2.</span> <span class="nav-text">安装Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Node-js"><span class="nav-number">1.3.</span> <span class="nav-text">安装Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Hexo"><span class="nav-number">1.4.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建Git仓库"><span class="nav-number">1.5.</span> <span class="nav-text">创建Git仓库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始使用"><span class="nav-number">2.</span> <span class="nav-text">开始使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建站"><span class="nav-number">2.1.</span> <span class="nav-text">建站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">2.2.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Site"><span class="nav-number">2.2.1.</span> <span class="nav-text">Site</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URL"><span class="nav-number">2.2.2.</span> <span class="nav-text">URL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Writing"><span class="nav-number">2.2.3.</span> <span class="nav-text">Writing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Extensions"><span class="nav-number">2.2.4.</span> <span class="nav-text">Extensions</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检验初步成果"><span class="nav-number">2.3.</span> <span class="nav-text">检验初步成果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建新文件"><span class="nav-number">2.3.1.</span> <span class="nav-text">创建新文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成静态文件"><span class="nav-number">2.3.2.</span> <span class="nav-text">生成静态文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行本地服务器"><span class="nav-number">2.3.3.</span> <span class="nav-text">运行本地服务器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主题配置"><span class="nav-number">3.</span> <span class="nav-text">主题配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载主题"><span class="nav-number">3.1.</span> <span class="nav-text">下载主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启用主题"><span class="nav-number">3.2.</span> <span class="nav-text">启用主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主题设定"><span class="nav-number">3.3.</span> <span class="nav-text">主题设定</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置-Scheme"><span class="nav-number">3.3.1.</span> <span class="nav-text">设置 Scheme</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置-菜单"><span class="nav-number">3.3.2.</span> <span class="nav-text">设置 菜单</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置-文章"><span class="nav-number">3.3.3.</span> <span class="nav-text">设置 文章</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置-侧栏"><span class="nav-number">3.3.4.</span> <span class="nav-text">设置 侧栏</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#社交链接"><span class="nav-number">3.3.4.1.</span> <span class="nav-text">社交链接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#友情链接"><span class="nav-number">3.3.4.2.</span> <span class="nav-text">友情链接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#边栏头像"><span class="nav-number">3.3.4.3.</span> <span class="nav-text">边栏头像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文章目录"><span class="nav-number">3.3.4.4.</span> <span class="nav-text">文章目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#侧栏相关设置"><span class="nav-number">3.3.4.5.</span> <span class="nav-text">侧栏相关设置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置-RSS"><span class="nav-number">3.3.5.</span> <span class="nav-text">设置  RSS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置-字体"><span class="nav-number">3.3.6.</span> <span class="nav-text">设置 字体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开启打赏功能"><span class="nav-number">3.3.7.</span> <span class="nav-text">开启打赏功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置动画效果"><span class="nav-number">3.3.8.</span> <span class="nav-text">设置动画效果</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基础动画："><span class="nav-number">3.3.8.1.</span> <span class="nav-text">基础动画：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设置进度条："><span class="nav-number">3.3.8.2.</span> <span class="nav-text">设置进度条：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设置背景动画："><span class="nav-number">3.3.8.3.</span> <span class="nav-text">设置背景动画：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#定义底部栏显示内容"><span class="nav-number">3.3.8.4.</span> <span class="nav-text">定义底部栏显示内容</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加相关界面"><span class="nav-number">3.3.9.</span> <span class="nav-text">添加相关界面</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#添加标签页"><span class="nav-number">3.3.9.1.</span> <span class="nav-text">添加标签页</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#添加分类页"><span class="nav-number">3.3.9.2.</span> <span class="nav-text">添加分类页</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#添加关于页"><span class="nav-number">3.3.9.3.</span> <span class="nav-text">添加关于页</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#添加404界面"><span class="nav-number">3.3.9.4.</span> <span class="nav-text">添加404界面</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#本地搜索服务"><span class="nav-number">3.3.10.</span> <span class="nav-text">本地搜索服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开启第三方服务"><span class="nav-number">3.3.11.</span> <span class="nav-text">开启第三方服务</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#阅读次数统计"><span class="nav-number">3.3.11.1.</span> <span class="nav-text">阅读次数统计</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#开启评论功能"><span class="nav-number">3.3.11.2.</span> <span class="nav-text">开启评论功能</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#网站访问次数"><span class="nav-number">3.3.11.3.</span> <span class="nav-text">网站访问次数</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本操作"><span class="nav-number">4.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建文章"><span class="nav-number">4.1.</span> <span class="nav-text">创建文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑文章"><span class="nav-number">4.2.</span> <span class="nav-text">编辑文章</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#标签插件"><span class="nav-number">4.2.1.</span> <span class="nav-text">标签插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图片资源"><span class="nav-number">4.2.2.</span> <span class="nav-text">图片资源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tops"><span class="nav-number">4.2.3.</span> <span class="nav-text">Tops</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署文章"><span class="nav-number">4.3.</span> <span class="nav-text">部署文章</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#静态文件生成"><span class="nav-number">4.3.1.</span> <span class="nav-text">静态文件生成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#本地服务调试"><span class="nav-number">4.3.2.</span> <span class="nav-text">本地服务调试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同步网站到服务器"><span class="nav-number">4.3.3.</span> <span class="nav-text">同步网站到服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他命令"><span class="nav-number">4.3.4.</span> <span class="nav-text">其他命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#发表草稿"><span class="nav-number">4.3.4.1.</span> <span class="nav-text">发表草稿</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#显示草稿"><span class="nav-number">4.3.4.2.</span> <span class="nav-text">显示草稿</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#清除缓存"><span class="nav-number">4.3.4.3.</span> <span class="nav-text">清除缓存</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列出网站资料"><span class="nav-number">4.3.4.4.</span> <span class="nav-text">列出网站资料</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#调试模式"><span class="nav-number">4.3.4.5.</span> <span class="nav-text">调试模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#简洁模式"><span class="nav-number">4.3.4.6.</span> <span class="nav-text">简洁模式</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Homebrew"><span class="nav-number">1.1.</span> <span class="nav-text">安装Homebrew</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Git"><span class="nav-number">1.2.</span> <span class="nav-text">安装Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Node-js"><span class="nav-number">1.3.</span> <span class="nav-text">安装Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Hexo"><span class="nav-number">1.4.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建Git仓库"><span class="nav-number">1.5.</span> <span class="nav-text">创建Git仓库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始使用"><span class="nav-number">2.</span> <span class="nav-text">开始使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建站"><span class="nav-number">2.1.</span> <span class="nav-text">建站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">2.2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检验成果"><span class="nav-number">2.3.</span> <span class="nav-text">检验成果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建新文件"><span class="nav-number">2.3.1.</span> <span class="nav-text">创建新文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成静态文件"><span class="nav-number">2.3.2.</span> <span class="nav-text">生成静态文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行本地服务器"><span class="nav-number">2.3.3.</span> <span class="nav-text">运行本地服务器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主题配置"><span class="nav-number">3.</span> <span class="nav-text">主题配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载主题"><span class="nav-number">3.1.</span> <span class="nav-text">下载主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启用主题"><span class="nav-number">3.2.</span> <span class="nav-text">启用主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主题设定"><span class="nav-number">3.3.</span> <span class="nav-text">主题设定</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置-Scheme"><span class="nav-number">3.3.1.</span> <span class="nav-text">设置 Scheme</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置-菜单"><span class="nav-number">3.3.2.</span> <span class="nav-text">设置 菜单</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置-文章"><span class="nav-number">3.3.3.</span> <span class="nav-text">设置 文章</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置-侧栏"><span class="nav-number">3.3.4.</span> <span class="nav-text">设置 侧栏</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#社交链接"><span class="nav-number">3.3.4.1.</span> <span class="nav-text">社交链接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#友情链接"><span class="nav-number">3.3.4.2.</span> <span class="nav-text">友情链接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#边栏头像"><span class="nav-number">3.3.4.3.</span> <span class="nav-text">边栏头像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文章目录"><span class="nav-number">3.3.4.4.</span> <span class="nav-text">文章目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#侧栏相关设置"><span class="nav-number">3.3.4.5.</span> <span class="nav-text">侧栏相关设置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置-RSS"><span class="nav-number">3.3.5.</span> <span class="nav-text">设置  RSS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置-字体"><span class="nav-number">3.3.6.</span> <span class="nav-text">设置 字体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开启打赏功能"><span class="nav-number">3.3.7.</span> <span class="nav-text">开启打赏功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置动画效果"><span class="nav-number">3.3.8.</span> <span class="nav-text">设置动画效果</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基础动画："><span class="nav-number">3.3.8.1.</span> <span class="nav-text">基础动画：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设置进度条："><span class="nav-number">3.3.8.2.</span> <span class="nav-text">设置进度条：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设置背景动画："><span class="nav-number">3.3.8.3.</span> <span class="nav-text">设置背景动画：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#定义底部栏显示内容"><span class="nav-number">3.3.8.4.</span> <span class="nav-text">定义底部栏显示内容</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加相关界面"><span class="nav-number">3.3.9.</span> <span class="nav-text">添加相关界面</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#添加标签页"><span class="nav-number">3.3.9.1.</span> <span class="nav-text">添加标签页</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#添加分类页"><span class="nav-number">3.3.9.2.</span> <span class="nav-text">添加分类页</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#添加关于页"><span class="nav-number">3.3.9.3.</span> <span class="nav-text">添加关于页</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#添加404界面"><span class="nav-number">3.3.9.4.</span> <span class="nav-text">添加404界面</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#本地搜索服务"><span class="nav-number">3.3.10.</span> <span class="nav-text">本地搜索服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开启第三方服务"><span class="nav-number">3.3.11.</span> <span class="nav-text">开启第三方服务</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#阅读次数统计"><span class="nav-number">3.3.11.1.</span> <span class="nav-text">阅读次数统计</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#开启评论功能"><span class="nav-number">3.3.11.2.</span> <span class="nav-text">开启评论功能</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#网站访问次数"><span class="nav-number">3.3.11.3.</span> <span class="nav-text">网站访问次数</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本操作"><span class="nav-number">4.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建文章"><span class="nav-number">4.1.</span> <span class="nav-text">创建文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑文章"><span class="nav-number">4.2.</span> <span class="nav-text">编辑文章</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#标签插件"><span class="nav-number">4.2.1.</span> <span class="nav-text">标签插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图片资源"><span class="nav-number">4.2.2.</span> <span class="nav-text">图片资源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tops"><span class="nav-number">4.2.3.</span> <span class="nav-text">Tops</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署文章"><span class="nav-number">4.3.</span> <span class="nav-text">部署文章</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#静态文件生成"><span class="nav-number">4.3.1.</span> <span class="nav-text">静态文件生成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#本地服务调试"><span class="nav-number">4.3.2.</span> <span class="nav-text">本地服务调试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同步网站到服务器"><span class="nav-number">4.3.3.</span> <span class="nav-text">同步网站到服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他命令"><span class="nav-number">4.3.4.</span> <span class="nav-text">其他命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#发表草稿"><span class="nav-number">4.3.4.1.</span> <span class="nav-text">发表草稿</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#显示草稿"><span class="nav-number">4.3.4.2.</span> <span class="nav-text">显示草稿</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#清除缓存"><span class="nav-number">4.3.4.3.</span> <span class="nav-text">清除缓存</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列出网站资料"><span class="nav-number">4.3.4.4.</span> <span class="nav-text">列出网站资料</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#调试模式"><span class="nav-number">4.3.4.5.</span> <span class="nav-text">调试模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#简洁模式"><span class="nav-number">4.3.4.6.</span> <span class="nav-text">简洁模式</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
