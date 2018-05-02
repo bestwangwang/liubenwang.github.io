@@ -136,11 +136,11 @@
 <meta name="keywords" content="Swift">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift:泛型">
-<meta property="og:url" content="https://liubenwang.github.io/2018/04/27/Swift-泛型/index.html">
+<meta property="og:url" content="https://liubenwang.github.io/2018/04/28/Swift-泛型/index.html">
 <meta property="og:site_name" content="benwang&#39;s blog">
 <meta property="og:description" content="泛型是 Swift 最强大的特性之一，许多 Swift 标准库是通过泛型代码构建的。常见的泛型集合有set、Array 和 Dictionary 。 官方文档如下： 123public struct Set&amp;lt;Element&amp;gt; where Element : Hashable &amp;#123;&amp;#125;public struct Array&amp;lt;Element&amp;gt; &amp;#123;&amp;#1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-28T10:51:44.165Z">
+<meta property="og:updated_time" content="2018-05-02T03:25:10.336Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift:泛型">
 <meta name="twitter:description" content="泛型是 Swift 最强大的特性之一，许多 Swift 标准库是通过泛型代码构建的。常见的泛型集合有set、Array 和 Dictionary 。 官方文档如下： 123public struct Set&amp;lt;Element&amp;gt; where Element : Hashable &amp;#123;&amp;#125;public struct Array&amp;lt;Element&amp;gt; &amp;#123;&amp;#1">
@@ -173,7 +173,7 @@
 
 
 
-  <link rel="canonical" href="https://liubenwang.github.io/2018/04/27/Swift-泛型/"/>
+  <link rel="canonical" href="https://liubenwang.github.io/2018/04/28/Swift-泛型/"/>
 
 
 
@@ -360,7 +360,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liubenwang.github.io/2018/04/27/Swift-泛型/">
+    <link itemprop="mainEntityOfPage" href="https://liubenwang.github.io/2018/04/28/Swift-泛型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="benwang">
@@ -389,8 +389,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-27T20:34:53+08:00">
-                2018-04-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-28T18:58:47+08:00">
+                2018-04-28
               </time>
             
 
@@ -430,8 +430,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/27/Swift-泛型/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/04/27/Swift-泛型/" itemprop="commentCount"></span>
+                <a href="/2018/04/28/Swift-泛型/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/04/28/Swift-泛型/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -439,7 +439,7 @@
 
           
           
-             <span id="/2018/04/27/Swift-泛型/" class="leancloud_visitors" data-flag-title="Swift:泛型">
+             <span id="/2018/04/28/Swift-泛型/" class="leancloud_visitors" data-flag-title="Swift:泛型">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -504,17 +504,17 @@
         <p>泛型是 Swift 最强大的特性之一，许多 Swift 标准库是通过泛型代码构建的。常见的泛型集合有<code>set</code>、<code>Array</code> 和 <code>Dictionary</code> 。</p>
 <p>官方文档如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public struct Set&lt;Element&gt; where Element : Hashable &#123;&#125;</span><br><span class="line">public struct Array&lt;Element&gt; &#123;&#125;</span><br><span class="line">public struct Dictionary&lt;Key, Value&gt; where Key : Hashable &#123;&#125;</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h3 id="泛型函数"><a href="#泛型函数" class="headerlink" title="泛型函数"></a>泛型函数</h3><p>泛型函数不指定参数类型，运行时根据参数类型决定。</p>
+<h3 id="泛型函数"><a href="#泛型函数" class="headerlink" title="泛型函数"></a>泛型函数</h3><p>泛型函数不指定参数类型，运行时根据传入参数类型决定。</p>
 <p><strong>使用泛型前：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">func swapTwoInts(_ a: inout Int, _ b: inout Int) &#123;</span><br><span class="line">    let temporaryA = a</span><br><span class="line">    a = b</span><br><span class="line">    b = temporaryA</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p><strong>使用泛型后：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">func swapTwoValues&lt;T&gt;(_ a: inout T, _ b: inout T) &#123;</span><br><span class="line">    let temporaryA = a</span><br><span class="line">    a = b</span><br><span class="line">    b = temporaryA</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>泛型函数使用<code>T</code>作为占用类型名，来代替实际类型名。<code>swapTwoValues(_:_:)</code>没有指定<code>a</code>和<code>b</code>的实际类型，仅指明了<code>a</code>和<code>b</code>是同一类型<code>T</code>，<code>T</code>的类型在根据传入<code>a</code>和<code>b</code>实际传入的类型决定。</p>
 <p>占用类型<code>T</code>是类型参数，紧跟在函数后面，用尖括号括起来，告诉swift编译器<code>T</code>是占用类型，不需要查<code>T</code>的实际类型，也可以提供多个类型参数，用逗号分开。</p>
 <blockquote>
 <p>当类型参数与和泛型函数之间没有意义关系时，通常使用单个字母来命名，例如 <code>T</code>、<code>U</code>、<code>V</code></p>
-<p><strong>注意：请使用使用大写开头的驼峰命名为类型参数命名，来表明其为占用类型，如 <code>T</code> 和 <code>MyTypeParameter</code></strong></p>
+<p><strong>注意：请使用大写开头的驼峰命名为类型参数命名，来表明其为占用类型，如 <code>T</code> 和 <code>MyTypeParameter</code></strong></p>
 </blockquote>
 <h3 id="泛型类型"><a href="#泛型类型" class="headerlink" title="泛型类型"></a>泛型类型</h3><p>除了泛型函数，Swift 还允许你定义泛型类型。这些自定义类、结构体和枚举可以适用于任何类型，类似于 <code>Array</code> 和 <code>Dictionary</code>。</p>
 <p><strong>使用泛型前：</strong></p>
@@ -553,7 +553,7 @@
 <p>占位类型参数 <code>Element</code> 被用作 <code>append(_:)</code> 方法的 <code>item</code> 参数和下标的返回类型。Swift 可以据此推断出 <code>Element</code> 的类型即是 <code>ItemType</code> 的类型。</p>
 <h3 id="关联类型约束"><a href="#关联类型约束" class="headerlink" title="关联类型约束"></a>关联类型约束</h3><p>下面的代码定义了一个 <code>Item</code> 必须遵循 <code>Equatable</code> 的 <code>Container</code> 类型：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">protocol Container &#123;</span><br><span class="line">    associatedtype Item: Equatable</span><br><span class="line">    mutating func append(_ item: Item)</span><br><span class="line">    var count: Int &#123; get &#125;</span><br><span class="line">    subscript(i: Int) -&gt; Item &#123; get &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="泛型-where-语句"><a href="#泛型-where-语句" class="headerlink" title="泛型 where 语句"></a>泛型 where 语句</h3><p><code>where</code>语句用于为关联类型添加约束，格式为紧跟在类型参数列表后定义<code>where</code>语句，<code>where</code>子句后跟一个或者多个针对关联类型的约束，以及一个或多个类型参数和关联类型间的相等关系。如下：</p>
+<h3 id="泛型-where-语句"><a href="#泛型-where-语句" class="headerlink" title="泛型 where 语句"></a>泛型 where 语句</h3><p><code>where</code>语句用于为泛型类型添加约束，格式为紧跟在类型参数列表后定义<code>where</code>语句，<code>where</code>子句后跟一个或者多个针对泛型类型的约束，以及一个或多个类型参数和关联类型间的相等关系。如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">func allItemsMatch&lt;C1: Container, C2: Container&gt;</span><br><span class="line">    (_ someContainer: C1, _ anotherContainer: C2) -&gt; Bool</span><br><span class="line">    where C1.ItemType == C2.ItemType, C1.ItemType: Equatable &#123;</span><br><span class="line"></span><br><span class="line">        // 检查两个容器含有相同数量的元素</span><br><span class="line">        if someContainer.count != anotherContainer.count &#123;</span><br><span class="line">            return false</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 检查每一对元素是否相等</span><br><span class="line">        for i in 0..&lt;someContainer.count &#123;</span><br><span class="line">            if someContainer[i] != anotherContainer[i] &#123;</span><br><span class="line">                return false</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 所有元素都匹配，返回 true</span><br><span class="line">        return true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>C1</code>和<code>C2</code>是符合<code>Container</code>协议的两个占位类型参数，<code>where</code>后定义了约束条件，<code>C1</code> 的 <code>ItemType</code> 必须和 <code>C2</code> 的 <code>ItemType</code>类型相同，<code>C1</code> 的 <code>ItemType</code> 必须符合 <code>Equatable</code> 协议。下面使用示例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var stackOfStrings = Stack&lt;String&gt;()</span><br><span class="line">stackOfStrings.push(&quot;uno&quot;)</span><br><span class="line">stackOfStrings.push(&quot;dos&quot;)</span><br><span class="line">stackOfStrings.push(&quot;tres&quot;)</span><br><span class="line"></span><br><span class="line">var arrayOfStrings = [&quot;uno&quot;, &quot;dos&quot;, &quot;tres&quot;]</span><br><span class="line"></span><br><span class="line">if allItemsMatch(stackOfStrings, arrayOfStrings) &#123;</span><br><span class="line">    print(&quot;All items match.&quot;)</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    print(&quot;Not all items match.&quot;)</span><br><span class="line">&#125;</span><br><span class="line">// 打印 “All items match.”</span><br></pre></td></tr></table></figure>

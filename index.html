@@ -360,7 +360,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liubenwang.github.io/2018/04/27/Swift-泛型/">
+    <link itemprop="mainEntityOfPage" href="https://liubenwang.github.io/2018/04/28/Swift-泛型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="benwang">
@@ -379,7 +379,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/27/Swift-泛型/" itemprop="url">Swift:泛型</a></h2>
+                <a class="post-title-link" href="/2018/04/28/Swift-泛型/" itemprop="url">Swift:泛型</a></h2>
         
 
         <div class="post-meta">
@@ -391,8 +391,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-27T20:34:53+08:00">
-                2018-04-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-28T18:58:47+08:00">
+                2018-04-28
               </time>
             
 
@@ -432,8 +432,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/27/Swift-泛型/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/04/27/Swift-泛型/" itemprop="commentCount"></span>
+                <a href="/2018/04/28/Swift-泛型/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/04/28/Swift-泛型/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -441,7 +441,7 @@
 
           
           
-             <span id="/2018/04/27/Swift-泛型/" class="leancloud_visitors" data-flag-title="Swift:泛型">
+             <span id="/2018/04/28/Swift-泛型/" class="leancloud_visitors" data-flag-title="Swift:泛型">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -507,9 +507,12 @@
           <p>泛型是 Swift 最强大的特性之一，许多 Swift 标准库是通过泛型代码构建的。常见的泛型集合有<code>set</code>、<code>Array</code> 和 <code>Dictionary</code> 。</p>
 <p>官方文档如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public struct Set&lt;Element&gt; where Element : Hashable &#123;&#125;</span><br><span class="line">public struct Array&lt;Element&gt; &#123;&#125;</span><br><span class="line">public struct Dictionary&lt;Key, Value&gt; where Key : Hashable &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="泛型函数"><a href="#泛型函数" class="headerlink" title="泛型函数"></a>泛型函数</h3><p>泛型函数不指定参数类型，运行时根据传入参数类型决定。</p>
+<p><strong>使用泛型前：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">func swapTwoInts(_ a: inout Int, _ b: inout Int) &#123;</span><br><span class="line">    let temporaryA = a</span><br><span class="line">    a = b</span><br><span class="line">    b = temporaryA</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/27/Swift-泛型/#more" rel="contents">
+            <a class="btn" href="/2018/04/28/Swift-泛型/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -712,12 +715,6 @@
 <p><a href="http://www.tornadoweb.org/" target="_blank" rel="noopener">Tornado</a> 是一个Python web框架和异步网络库，起初由 <a href="http://friendfeed.com/" target="_blank" rel="noopener">FriendFeed</a> 开发. 通过使用单线程异步的非阻塞网络I/O， Tornado可以支撑上万级的连接，处理 <a href="http://en.wikipedia.org/wiki/Push_technology#Long_polling" target="_blank" rel="noopener">长连接</a>, <a href="http://en.wikipedia.org/wiki/WebSocket" target="_blank" rel="noopener">WebSockets</a> ，和其他需要与每个用户保持长久连接的高性能Web服务.<em>本节不介绍Linux环境搭建，默认已安装虚拟机和Python3虚拟环境.</em></p>
 <p><strong>本章运行环境介绍</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">macOS High Sierra 10.13.3</span><br><span class="line">VirtualBox</span><br><span class="line">Ubuntu16.04-32bit</span><br><span class="line">Pycharm</span><br></pre></td></tr></table></figure>
-<p><strong>在终端使用ssh连接虚拟机</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh &lt;username&gt;@127.0.0.1 -p &lt;port&gt;</span><br></pre></td></tr></table></figure>
-<p><strong>切换到Python3虚拟环境</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">workon py3env</span><br></pre></td></tr></table></figure>
-<p><strong>使用<a href="https://pypi.org/project/pip/" target="_blank" rel="noopener">pip</a>安装Tornado</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install tornado</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/04/27/Tornado/#more" rel="contents">
@@ -877,7 +874,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4,970
+                  5,016
                 </span>
               
 
