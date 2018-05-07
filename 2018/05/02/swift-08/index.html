@@ -132,18 +132,18 @@
 
 
 
-<meta name="description" content="类与结构体的对比swift中类与结构体的共同点：  定义属性用于存储值 定义方法用于提供功能 定义下标操作，可以通过下标语法来访问实例所包含的值 定义构造器用于生成初始化值 通过扩展以增加默认实现的功能 实现协议以提供某种标准功能  与结构体不同，类还有如下功能：  继承，允许一个类继承另一个类的特征 类型转换允许在运行时检查和解释一个实例的类型     不懂？ 析构器，允许一个类实例释放任何其所">
+<meta name="description" content="类和结构体是人们构建代码所用的一种通用且灵活的构造体。我们可以使用完全相同的语法规则来为类和结构体定义属性（常量、变量）和添加方法，从而扩展类和结构体的功能。 与其他编程语言所不同的是，Swift 并不要求你为自定义类和结构去创建独立的接口和实现文件。你所要做的是在一个单一文件中定义一个类或者结构体，系统将会自动生成面向其它代码的外部接口。">
 <meta name="keywords" content="Swift">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift-类与结构体">
 <meta property="og:url" content="https://liubenwang.github.io/2018/05/02/swift-08/index.html">
 <meta property="og:site_name" content="benwang&#39;s blog">
-<meta property="og:description" content="类与结构体的对比swift中类与结构体的共同点：  定义属性用于存储值 定义方法用于提供功能 定义下标操作，可以通过下标语法来访问实例所包含的值 定义构造器用于生成初始化值 通过扩展以增加默认实现的功能 实现协议以提供某种标准功能  与结构体不同，类还有如下功能：  继承，允许一个类继承另一个类的特征 类型转换允许在运行时检查和解释一个实例的类型     不懂？ 析构器，允许一个类实例释放任何其所">
+<meta property="og:description" content="类和结构体是人们构建代码所用的一种通用且灵活的构造体。我们可以使用完全相同的语法规则来为类和结构体定义属性（常量、变量）和添加方法，从而扩展类和结构体的功能。 与其他编程语言所不同的是，Swift 并不要求你为自定义类和结构去创建独立的接口和实现文件。你所要做的是在一个单一文件中定义一个类或者结构体，系统将会自动生成面向其它代码的外部接口。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-07T07:33:28.504Z">
+<meta property="og:updated_time" content="2018-05-07T10:36:18.905Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift-类与结构体">
-<meta name="twitter:description" content="类与结构体的对比swift中类与结构体的共同点：  定义属性用于存储值 定义方法用于提供功能 定义下标操作，可以通过下标语法来访问实例所包含的值 定义构造器用于生成初始化值 通过扩展以增加默认实现的功能 实现协议以提供某种标准功能  与结构体不同，类还有如下功能：  继承，允许一个类继承另一个类的特征 类型转换允许在运行时检查和解释一个实例的类型     不懂？ 析构器，允许一个类实例释放任何其所">
+<meta name="twitter:description" content="类和结构体是人们构建代码所用的一种通用且灵活的构造体。我们可以使用完全相同的语法规则来为类和结构体定义属性（常量、变量）和添加方法，从而扩展类和结构体的功能。 与其他编程语言所不同的是，Swift 并不要求你为自定义类和结构去创建独立的接口和实现文件。你所要做的是在一个单一文件中定义一个类或者结构体，系统将会自动生成面向其它代码的外部接口。">
 
 
 
@@ -405,7 +405,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-05-07T15:33:28+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-05-07T18:36:18+08:00">
                 2018-05-07
               </time>
             
@@ -476,7 +476,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,415
+                  1,570
                 </span>
               
 
@@ -492,7 +492,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  6
                 </span>
               
             </div>
@@ -513,7 +513,10 @@
       
 
       
-        <h3 id="类与结构体的对比"><a href="#类与结构体的对比" class="headerlink" title="类与结构体的对比"></a>类与结构体的对比</h3><p><strong>swift中类与结构体的共同点：</strong></p>
+        <p>类和结构体是人们构建代码所用的一种通用且灵活的构造体。我们可以使用完全相同的语法规则来为类和结构体定义属性（常量、变量）和添加方法，从而扩展类和结构体的功能。</p>
+<p>与其他编程语言所不同的是，Swift 并不要求你为自定义类和结构去创建独立的接口和实现文件。你所要做的是在一个单一文件中定义一个类或者结构体，系统将会自动生成面向其它代码的外部接口。</p>
+<a id="more"></a>
+<h3 id="类与结构体的对比"><a href="#类与结构体的对比" class="headerlink" title="类与结构体的对比"></a>类与结构体的对比</h3><p><strong>swift中类与结构体的共同点：</strong></p>
 <ul>
 <li>定义属性用于存储值</li>
 <li>定义方法用于提供功能</li>
