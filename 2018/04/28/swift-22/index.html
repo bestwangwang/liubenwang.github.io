@@ -132,18 +132,18 @@
 
 
 
-<meta name="description" content="泛型是 Swift 最强大的特性之一，许多 Swift 标准库是通过泛型代码构建的。常见的泛型集合有set、Array 和 Dictionary 。 官方文档如下： 123public struct Set&amp;lt;Element&amp;gt; where Element : Hashable &amp;#123;&amp;#125;public struct Array&amp;lt;Element&amp;gt; &amp;#123;&amp;#1">
+<meta name="description" content="泛型是 Swift 最强大的特性之一，许多 Swift 标准库是通过泛型代码构建的。常见的泛型集合有set、Array 和 Dictionary 。">
 <meta name="keywords" content="Swift">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift-泛型">
 <meta property="og:url" content="https://liubenwang.github.io/2018/04/28/swift-22/index.html">
 <meta property="og:site_name" content="benwang&#39;s blog">
-<meta property="og:description" content="泛型是 Swift 最强大的特性之一，许多 Swift 标准库是通过泛型代码构建的。常见的泛型集合有set、Array 和 Dictionary 。 官方文档如下： 123public struct Set&amp;lt;Element&amp;gt; where Element : Hashable &amp;#123;&amp;#125;public struct Array&amp;lt;Element&amp;gt; &amp;#123;&amp;#1">
+<meta property="og:description" content="泛型是 Swift 最强大的特性之一，许多 Swift 标准库是通过泛型代码构建的。常见的泛型集合有set、Array 和 Dictionary 。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-02T06:11:57.827Z">
+<meta property="og:updated_time" content="2018-05-09T06:22:58.955Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift-泛型">
-<meta name="twitter:description" content="泛型是 Swift 最强大的特性之一，许多 Swift 标准库是通过泛型代码构建的。常见的泛型集合有set、Array 和 Dictionary 。 官方文档如下： 123public struct Set&amp;lt;Element&amp;gt; where Element : Hashable &amp;#123;&amp;#125;public struct Array&amp;lt;Element&amp;gt; &amp;#123;&amp;#1">
+<meta name="twitter:description" content="泛型是 Swift 最强大的特性之一，许多 Swift 标准库是通过泛型代码构建的。常见的泛型集合有set、Array 和 Dictionary 。">
 
 
 
@@ -405,8 +405,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-05-02T14:11:57+08:00">
-                2018-05-02
+              <time title="更新于" itemprop="dateModified" datetime="2018-05-09T14:22:58+08:00">
+                2018-05-09
               </time>
             
           </span>
@@ -514,12 +514,12 @@
 
       
         <p>泛型是 Swift 最强大的特性之一，许多 Swift 标准库是通过泛型代码构建的。常见的泛型集合有<code>set</code>、<code>Array</code> 和 <code>Dictionary</code> 。</p>
+<a id="more"></a>
 <p>官方文档如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public struct Set&lt;Element&gt; where Element : Hashable &#123;&#125;</span><br><span class="line">public struct Array&lt;Element&gt; &#123;&#125;</span><br><span class="line">public struct Dictionary&lt;Key, Value&gt; where Key : Hashable &#123;&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="泛型函数"><a href="#泛型函数" class="headerlink" title="泛型函数"></a>泛型函数</h3><p>泛型函数不指定参数类型，运行时根据传入参数类型决定。</p>
 <p><strong>使用泛型前：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">func swapTwoInts(_ a: inout Int, _ b: inout Int) &#123;</span><br><span class="line">    let temporaryA = a</span><br><span class="line">    a = b</span><br><span class="line">    b = temporaryA</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
 <p><strong>使用泛型后：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">func swapTwoValues&lt;T&gt;(_ a: inout T, _ b: inout T) &#123;</span><br><span class="line">    let temporaryA = a</span><br><span class="line">    a = b</span><br><span class="line">    b = temporaryA</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>泛型函数使用<code>T</code>作为占用类型名，来代替实际类型名。<code>swapTwoValues(_:_:)</code>没有指定<code>a</code>和<code>b</code>的实际类型，仅指明了<code>a</code>和<code>b</code>是同一类型<code>T</code>，<code>T</code>的类型在根据传入<code>a</code>和<code>b</code>实际传入的类型决定。</p>
