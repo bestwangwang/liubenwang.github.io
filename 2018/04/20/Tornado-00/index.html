@@ -141,7 +141,8 @@
 <meta property="og:description" content="Tornado简介 Tornado [tɔː’neɪdəʊ] n. [气象] 龙卷风；旋风；暴风；大雷雨  Tornado 是一个Python web框架和异步网络库，起初由 FriendFeed 开发. 通过使用单线程异步的非阻塞网络I/O， Tornado可以支撑上万级的连接，处理 长连接, WebSockets ，和其他需要与每个用户保持长久连接的高性能Web服务.本节不介绍Linux环境">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://tornado-zh.readthedocs.io/zh/latest/_images/tornado.png">
-<meta property="og:updated_time" content="2018-05-04T10:05:18.143Z">
+<meta property="og:image" content="https://liubenwang.github.io/2018/04/20/tornado-00/req-rsp.jpg">
+<meta property="og:updated_time" content="2018-05-09T07:28:05.280Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tornado-初识">
 <meta name="twitter:description" content="Tornado简介 Tornado [tɔː’neɪdəʊ] n. [气象] 龙卷风；旋风；暴风；大雷雨  Tornado 是一个Python web框架和异步网络库，起初由 FriendFeed 开发. 通过使用单线程异步的非阻塞网络I/O， Tornado可以支撑上万级的连接，处理 长连接, WebSockets ，和其他需要与每个用户保持长久连接的高性能Web服务.本节不介绍Linux环境">
@@ -407,8 +408,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-05-04T18:05:18+08:00">
-                2018-05-04
+              <time title="更新于" itemprop="dateModified" datetime="2018-05-09T15:28:05+08:00">
+                2018-05-09
               </time>
             
           </span>
@@ -478,7 +479,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,800
+                  2,526
                 </span>
               
 
@@ -494,7 +495,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  11
                 </span>
               
             </div>
@@ -620,7 +621,42 @@
 <p>控制台打印：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">finish后</span><br></pre></td></tr></table></figure>
 <p>更详细内容可查看<a href="http://tornado-zh.readthedocs.io/" target="_blank" rel="noopener">官方中文文档</a></p>
-<p>### </p>
+<p>###请求与响应</p>
+<h4 id="信息简介"><a href="#信息简介" class="headerlink" title="信息简介"></a>信息简介</h4><p>在服务端与客户端数据交互的过程中，信息的相互传递包含两部分：请求部分和响应部分，请求部分是客户端向服务端发起请求时携带的信息；响应部分是服务端响应请求后返回的携带信息，如下图：<img src="req-rsp.jpg" alt="req-rsp"></p>
+<p><strong>请求头 Request Headers</strong></p>
+<p><code>Accept</code>：客户端可接受的MIME类型</p>
+<p><code>Accept-Encoding</code>：客户端可接受的编码方式</p>
+<p><code>Accept-language</code>：客户端支持的语言</p>
+<p><code>Cache-Control</code>：缓存最大量</p>
+<p><code>Connection</code>：是否保持持久连接</p>
+<p><code>Cookie</code>：缓存</p>
+<p><code>Host</code>：请求的主机名和端口号</p>
+<p><code>User-Agent</code>：当前客户端类型</p>
+<p><strong>响应头 Reponse Headers</strong></p>
+<p><code>Connection</code>：是否保持持久连接</p>
+<p><code>Content-Type</code>：响应正文的MIME类似</p>
+<h4 id="修改响应部分"><a href="#修改响应部分" class="headerlink" title="修改响应部分"></a>修改响应部分</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class SetResponseHandler(tornado.web.RequestHandler):</span><br><span class="line">    def get(self, *args, **kwargs):</span><br><span class="line">        self.write(&quot;设置响应头&quot;)</span><br><span class="line">        self.set_header(&apos;token&apos;,&apos;kweins923o23isdke82p3duo2k3m&apos;)</span><br><span class="line">        self.set_header(&apos;session&apos;,&apos;223dmu2nnjdisunsiouk2j32332&apos;)</span><br><span class="line">        self.add_header(&apos;token&apos;,&apos;addaddadd&apos;)</span><br><span class="line">        self.clear_header(&apos;token&apos;)</span><br><span class="line">        self.send_error(404)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意事项：</strong></p>
+<p><code>set_header</code>：设置新的响应头，若已存在则覆盖之前的。</p>
+<p><code>add_header</code>：添加新的响应头，不会覆盖已存在的。</p>
+<p><code>clear_header</code>：删除所有指定的请求头。</p>
+<p><code>send_error</code>：发送指定HTTP错误码，会丢弃已写入未刷新的内容；如果在<code>sender_error</code>前执行了<code>flush()</code>方法，则<code>send_error</code>无效。</p>
+</blockquote>
+<h4 id="自定义错误页面"><a href="#自定义错误页面" class="headerlink" title="自定义错误页面"></a>自定义错误页面</h4><p>重写<code>write_error</code>方法可实现自定义错误页面，即在调用<code>send_error</code>方法时出现自定义错误页面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class SetResponseHandler(tornado.web.RequestHandler):</span><br><span class="line">    def get(self, *args, **kwargs):</span><br><span class="line">        self.send_error(404)</span><br><span class="line">        </span><br><span class="line">    def write_error(self, error_code, **kwargs):</span><br><span class="line">        self.write(&apos;error code: %s&apos;%error_code)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：说明<code>send_error</code>方法底层仍然是调用了<code>write_error</code>方法。</p>
+</blockquote>
+<h4 id="未定义路由处理"><a href="#未定义路由处理" class="headerlink" title="未定义路由处理"></a>未定义路由处理</h4><p>之前提到的，在浏览器上访问路由表中注册的路由，如果访问未注册的路由则抛出异常。如何拦截未注册路由避免报错呢，下面介绍：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class NotFoundHandler(tornado.web.RequestHandler):</span><br><span class="line">    def get(self, *args, **kwargs):</span><br><span class="line">        self.send_error(404)</span><br><span class="line"></span><br><span class="line">    def write_error(self, status_code, **kwargs):</span><br><span class="line">        self.render(&apos;404.html&apos;)</span><br><span class="line"></span><br><span class="line">def makeApp():</span><br><span class="line">    return tornado.web.Application(</span><br><span class="line">       handlers = [</span><br><span class="line">            (r&apos;/response&apos;,SetResponseHandler),</span><br><span class="line">            (r&apos;/(.*)&apos;,NotFoundHandler),</span><br><span class="line">        ],</span><br><span class="line">        debug = True,</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<ol>
+<li>在路由表中添加通配路由，为了不影响其他路由要保持通配路由优先级最低，即通配路由写在路由表的最后(路由表存在优先级，末尾优先级最低)。</li>
+<li>添加Handler，导向自定义的错误页面。如<code>NotFoundHandler</code>所示。</li>
+</ol>
+<h4 id="请求处理过程"><a href="#请求处理过程" class="headerlink" title="请求处理过程"></a>请求处理过程</h4><p>一个请求的声明周期都经过哪几步呢？如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class RequestCycleHandler(tornado.web.RequestHandler):</span><br><span class="line">    def set_default_headers(self):</span><br><span class="line">        print(&apos;设置请求头：set_default_headers&apos;)</span><br><span class="line">    def initialize(self):</span><br><span class="line">        print(&apos;初始化：initialize&apos;)</span><br><span class="line">    def prepare(self):</span><br><span class="line">        print(&apos;准备工作：prepare&apos;)</span><br><span class="line">    def get(self, *args, **kwargs):</span><br><span class="line">        print(&apos;处理get请求&apos;)</span><br><span class="line">    def post(self, *args, **kwargs):</span><br><span class="line">        print(&apos;处理post请求&apos;)</span><br><span class="line">    def write_error(self, status_code, **kwargs):</span><br><span class="line">        print(&apos;处理错误&apos;)</span><br><span class="line">    def on_finish(self):</span><br><span class="line">        print(&apos;释放资源&apos;)</span><br></pre></td></tr></table></figure>
+<p>调用<code>RequestCycleHandler</code>即可打印出处理步骤。</p>
 
       
     </div>
@@ -779,7 +815,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -887,7 +923,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tornado简介"><span class="nav-number">1.</span> <span class="nav-text">Tornado简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tornado示例"><span class="nav-number">2.</span> <span class="nav-text">Tornado示例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hello-world"><span class="nav-number">2.1.</span> <span class="nav-text">Hello world</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动Tornado"><span class="nav-number">2.2.</span> <span class="nav-text">启动Tornado</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取URL参数"><span class="nav-number">2.3.</span> <span class="nav-text">获取URL参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取body参数"><span class="nav-number">2.4.</span> <span class="nav-text">获取body参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出操作相关"><span class="nav-number">3.</span> <span class="nav-text">输出操作相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#write"><span class="nav-number">3.1.</span> <span class="nav-text">write()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flush"><span class="nav-number">3.2.</span> <span class="nav-text">flush()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#render"><span class="nav-number">3.3.</span> <span class="nav-text">render()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重定向"><span class="nav-number">3.4.</span> <span class="nav-text">重定向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#finish"><span class="nav-number">3.5.</span> <span class="nav-text">finish()</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tornado简介"><span class="nav-number">1.</span> <span class="nav-text">Tornado简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tornado示例"><span class="nav-number">2.</span> <span class="nav-text">Tornado示例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hello-world"><span class="nav-number">2.1.</span> <span class="nav-text">Hello world</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动Tornado"><span class="nav-number">2.2.</span> <span class="nav-text">启动Tornado</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取URL参数"><span class="nav-number">2.3.</span> <span class="nav-text">获取URL参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取body参数"><span class="nav-number">2.4.</span> <span class="nav-text">获取body参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出操作相关"><span class="nav-number">3.</span> <span class="nav-text">输出操作相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#write"><span class="nav-number">3.1.</span> <span class="nav-text">write()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flush"><span class="nav-number">3.2.</span> <span class="nav-text">flush()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#render"><span class="nav-number">3.3.</span> <span class="nav-text">render()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重定向"><span class="nav-number">3.4.</span> <span class="nav-text">重定向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#finish"><span class="nav-number">3.5.</span> <span class="nav-text">finish()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#信息简介"><span class="nav-number">3.6.</span> <span class="nav-text">信息简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改响应部分"><span class="nav-number">3.7.</span> <span class="nav-text">修改响应部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义错误页面"><span class="nav-number">3.8.</span> <span class="nav-text">自定义错误页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#未定义路由处理"><span class="nav-number">3.9.</span> <span class="nav-text">未定义路由处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请求处理过程"><span class="nav-number">3.10.</span> <span class="nav-text">请求处理过程</span></a></li></ol></li></ol></div>
             
 
           </div>
