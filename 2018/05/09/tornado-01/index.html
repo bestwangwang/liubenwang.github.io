@@ -140,7 +140,7 @@
 <meta property="og:site_name" content="benwang&#39;s blog">
 <meta property="og:description" content="模板是tornado中比较重要的一部分内容，在tornado中，模板实质就是HTML文件，通过模板语法在HTML文件中植入模板符号，渲染时传入数据，达到灵活配置HTML文件的目的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-09T09:38:41.011Z">
+<meta property="og:updated_time" content="2018-05-10T01:57:33.317Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tornado-模板">
 <meta name="twitter:description" content="模板是tornado中比较重要的一部分内容，在tornado中，模板实质就是HTML文件，通过模板语法在HTML文件中植入模板符号，渲染时传入数据，达到灵活配置HTML文件的目的。">
@@ -405,8 +405,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-05-09T17:38:41+08:00">
-                2018-05-09
+              <time title="更新于" itemprop="dateModified" datetime="2018-05-10T09:57:33+08:00">
+                2018-05-10
               </time>
             
           </span>
@@ -476,7 +476,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  944
+                  1,590
                 </span>
               
 
@@ -492,7 +492,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  7
                 </span>
               
             </div>
@@ -573,7 +573,38 @@
 <p>第一种方式：浏览器会自动缓存静态文件并加版本号，若版本号改变则自动缓存新的静态文件；</p>
 <p>第二种方式：<code>static</code>是关键字，浏览器会自动根据静态文件路径配置找到文件，即<code>static</code>等同于<code>static_path</code>中的路径。</p>
 </blockquote>
-<h3 id="模板继承"><a href="#模板继承" class="headerlink" title="模板继承"></a>模板继承</h3>
+<h3 id="模板继承"><a href="#模板继承" class="headerlink" title="模板继承"></a>模板继承</h3><p>模板继承为了解决代码复用问题，子模板继承父模板后，可以继承父模板所有的模板内容，同时也可修改代码块来覆盖父代码块。</p>
+<p><strong>父模板中的代码块</strong></p>
+<p>父模板通过<code>block</code>定义代码段，用于在子模板复用，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;% block title %&#125;</span><br><span class="line">	父模板标题</span><br><span class="line">&#123;% end %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line">	父模板内容</span><br><span class="line">&#123;% end %&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>子模板继承父模板</strong></p>
+<p>子模板通过<code>extends</code>来继承父模板内容，也可根据<code>block</code>中的名称来覆写父代码段，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends ./super.html %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block title %&#125;</span><br><span class="line">	子模板标题</span><br><span class="line">&#123;% end %&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>模板导入</strong></p>
+<p>除了继承外，还可以使用导入来达到和继承类似的效果，不同点是用于导入的模板中不出现block和extend，另不可，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% include ./super.html %&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="函数和类的导入"><a href="#函数和类的导入" class="headerlink" title="函数和类的导入"></a>函数和类的导入</h3><p>函数和类的导入有两种方式，一种是渲染时导入，一种是直接导入。</p>
+<h4 id="渲染时导入"><a href="#渲染时导入" class="headerlink" title="渲染时导入"></a>渲染时导入</h4><p>渲染时导入，即在<code>render</code>调用是传入函数或类。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class TemplateHandler(tornado.web.RequestHandler):</span><br><span class="line">    def get(self, *args, **kwargs):</span><br><span class="line">        self.write(&apos;渲染时导入&apos;)</span><br><span class="line">        self.render(&apos;temp.html&apos;,</span><br><span class="line">                    info=&apos;hello world!&apos;,</span><br><span class="line">                    cla=OuterClass,</span><br><span class="line">                    inter=self.interFunc,</span><br><span class="line">                    outer=outerFunc)</span><br><span class="line">                    </span><br><span class="line">    def interFunc(self):</span><br><span class="line">        return &apos;inter func&apos;</span><br><span class="line"></span><br><span class="line">class OuterClass:</span><br><span class="line">    def outer(self):</span><br><span class="line">        return &apos;outer class&apos;</span><br><span class="line">        </span><br><span class="line">def outerFunc(a):</span><br><span class="line">    return a.upper()</span><br></pre></td></tr></table></figure>
+<p>模板中调用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;cla().outer()&#125;&#125;</span><br><span class="line">&#123;&#123; inter() &#125;&#125;</span><br><span class="line">&#123;&#123; outer(&apos;abc&apos;) &#125;&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="模板中直接导入"><a href="#模板中直接导入" class="headerlink" title="模板中直接导入"></a>模板中直接导入</h4><p>模板中直接导入分为导入内置模块和导入自定义模块两部分。</p>
+<h5 id="导入内置模块"><a href="#导入内置模块" class="headerlink" title="导入内置模块"></a>导入内置模块</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% import time %&#125;</span><br><span class="line">&#123;&#123; time.time() &#125;&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="导入自定义模块"><a href="#导入自定义模块" class="headerlink" title="导入自定义模块"></a>导入自定义模块</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% from mod import desc %&#125;</span><br><span class="line">&#123;&#123; desc() &#125;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="UI模板"><a href="#UI模板" class="headerlink" title="UI模板"></a>UI模板</h3><p>Tornado支持 <em>UI modules</em> 使它易于支持标准, 在你的应用程序中复用 UI组件. UI模块像是特殊的函数调用来渲染你的页面上的组件并且它们可 以包装自己的CSS和JavaScript.</p>
+<p><strong>1.新建uimodules.py</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">form tornado.web import UIModule</span><br><span class="line"></span><br><span class="line">class Entry(tornado.web.UIModule):</span><br><span class="line">    def render(self, *args, **kwargs):</span><br><span class="line">        return &apos;Entry UIModule&apos;</span><br></pre></td></tr></table></figure>
+<p>在Application中, 使用 <code>ui_modules</code> 配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from . import uimodules</span><br><span class="line"></span><br><span class="line">def makeApp():</span><br><span class="line">    return tornado.web.Application(</span><br><span class="line">        handlers=[</span><br><span class="line">            (r&apos;/template&apos;,TemplateHandler),</span><br><span class="line">        ],</span><br><span class="line">        debug=True,</span><br><span class="line">        template_path=&apos;templates&apos;,</span><br><span class="line">        static_path=&apos;static&apos;,</span><br><span class="line">        ui_modules=util.ui_modules,</span><br><span class="line">        )</span><br></pre></td></tr></table></figure>
+<p>在模板即可使用module语法调用一个模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% module Entry() %&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="模板其他命令"><a href="#模板其他命令" class="headerlink" title="模板其他命令"></a>模板其他命令</h3><p><strong>apply</strong></p>
+<p>使用apply语句，使用函数的作用域范围到end为止</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;% apply outer %&#125;</span><br><span class="line">     adfa</span><br><span class="line">     asdfa</span><br><span class="line">&#123;% end %&#125;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">qww</span><br></pre></td></tr></table></figure>
+<p><strong>linkify</strong></p>
+<p>使用linkify语句可以生成一个链接标签，但标签会被转义。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; linkify(&apos;百度：http://www.baidu.com&apos;) &#125;&#125;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&#123;% raw linkify(&apos;百度：http://www.baidu.com&apos;) %&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -835,7 +866,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#构建模板"><span class="nav-number">1.</span> <span class="nav-text">构建模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板符号"><span class="nav-number">2.</span> <span class="nav-text">模板符号</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#表达式"><span class="nav-number">2.1.</span> <span class="nav-text">表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指令"><span class="nav-number">2.2.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注释"><span class="nav-number">2.3.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#打印"><span class="nav-number">2.4.</span> <span class="nav-text">打印</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程控制语句"><span class="nav-number">3.</span> <span class="nav-text">流程控制语句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#if语句"><span class="nav-number">3.1.</span> <span class="nav-text">if语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#for循环"><span class="nav-number">3.2.</span> <span class="nav-text">for循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#while循环"><span class="nav-number">3.3.</span> <span class="nav-text">while循环</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板转义"><span class="nav-number">4.</span> <span class="nav-text">模板转义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#局部去转义"><span class="nav-number">4.1.</span> <span class="nav-text">局部去转义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#全局去转义"><span class="nav-number">4.2.</span> <span class="nav-text">全局去转义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态文件的引入方式"><span class="nav-number">5.</span> <span class="nav-text">静态文件的引入方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板继承"><span class="nav-number">6.</span> <span class="nav-text">模板继承</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#构建模板"><span class="nav-number">1.</span> <span class="nav-text">构建模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板符号"><span class="nav-number">2.</span> <span class="nav-text">模板符号</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#表达式"><span class="nav-number">2.1.</span> <span class="nav-text">表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指令"><span class="nav-number">2.2.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注释"><span class="nav-number">2.3.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#打印"><span class="nav-number">2.4.</span> <span class="nav-text">打印</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程控制语句"><span class="nav-number">3.</span> <span class="nav-text">流程控制语句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#if语句"><span class="nav-number">3.1.</span> <span class="nav-text">if语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#for循环"><span class="nav-number">3.2.</span> <span class="nav-text">for循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#while循环"><span class="nav-number">3.3.</span> <span class="nav-text">while循环</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板转义"><span class="nav-number">4.</span> <span class="nav-text">模板转义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#局部去转义"><span class="nav-number">4.1.</span> <span class="nav-text">局部去转义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#全局去转义"><span class="nav-number">4.2.</span> <span class="nav-text">全局去转义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态文件的引入方式"><span class="nav-number">5.</span> <span class="nav-text">静态文件的引入方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板继承"><span class="nav-number">6.</span> <span class="nav-text">模板继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数和类的导入"><span class="nav-number">7.</span> <span class="nav-text">函数和类的导入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#渲染时导入"><span class="nav-number">7.1.</span> <span class="nav-text">渲染时导入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模板中直接导入"><span class="nav-number">7.2.</span> <span class="nav-text">模板中直接导入</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#导入内置模块"><span class="nav-number">7.2.1.</span> <span class="nav-text">导入内置模块</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#导入自定义模块"><span class="nav-number">7.2.2.</span> <span class="nav-text">导入自定义模块</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UI模板"><span class="nav-number">8.</span> <span class="nav-text">UI模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板其他命令"><span class="nav-number">9.</span> <span class="nav-text">模板其他命令</span></a></li></ol></div>
             
 
           </div>
