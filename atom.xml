@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://liubenwang.github.io/"/>
-  <updated>2018-05-11T09:01:41.202Z</updated>
+  <updated>2018-06-14T08:20:36.590Z</updated>
   <id>https://liubenwang.github.io/</id>
   
   <author>
@@ -15,6 +15,58 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用SSH连接Linux虚拟机报错解决办法：”WARNING:_REMOTE_HOST_IDENTIFICATION_HAS_CHANGED!“</title>
+    <link href="https://liubenwang.github.io/2018/06/13/ssh-error-00/"/>
+    <id>https://liubenwang.github.io/2018/06/13/ssh-error-00/</id>
+    <published>2018-06-13T01:49:34.000Z</published>
+    <updated>2018-06-14T08:20:36.590Z</updated>
+    
+    <content type="html"><![CDATA[<p>在终端上使用SSH连接虚拟机报错内容如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">benwangdeMacBook-Pro:~ benwang$ ssh benco@127.0.0.1 -p 2345</span><br><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @</span><br><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!</span><br><span class="line">Someone could be eavesdropping on you right now (man-in-the-middle attack)!</span><br><span class="line">It is also possible that a host key has just been changed.</span><br><span class="line">The fingerprint for the ECDSA key sent by the remote host is</span><br><span class="line">SHA256:TPfOSnsIWZqjiPST/yWJOhR1h+eP0VHBqqsgTbb9RH0.</span><br><span class="line">Please contact your system administrator.</span><br><span class="line">Add correct host key in /Users/benwangliu/.ssh/known_hosts to get rid of this message.</span><br><span class="line">Offending ECDSA key in /Users/benwangliu/.ssh/known_hosts:15</span><br><span class="line">ECDSA host key for [127.0.0.1]:2345 has changed and you have requested strict checking.</span><br><span class="line">Host key verification failed.</span><br><span class="line">benwangdeMacBook-Pro:~ benwang$</span><br></pre></td></tr></table></figure><a id="more"></a><h4 id="解决办法如下："><a href="#解决办法如下：" class="headerlink" title="解决办法如下："></a>解决办法如下：</h4><h5 id="提取重要的报错信息"><a href="#提取重要的报错信息" class="headerlink" title="提取重要的报错信息"></a>提取重要的报错信息</h5><p>如上，提取报错中的重要信息：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">The fingerprint for the ECDSA key sent by the remote host is</span><br><span class="line">SHA256:TPfOSnsIWZqjiPST/yWJOhR1h+eP0VHBqqsgTbb9RH0.</span><br><span class="line">Please contact your system administrator.</span><br><span class="line">Add correct host key in /Users/benwangliu/.ssh/known_hosts to get rid of this message.</span><br><span class="line">Offending ECDSA key in /Users/benwangliu/.ssh/known_hosts:15</span><br><span class="line">ECDSA host key for [127.0.0.1]:2345 has changed and you have requested strict checking.</span><br><span class="line">Host key verification failed.</span><br></pre></td></tr></table></figure><p><code>/Users/benwangliu/.ssh/known_hosts</code>，这里是记录远程主机的公钥文件，报错原因是<code>[127.0.0.1]:2345</code>这个IP对应的公钥改变，未通过SSH验证导致的。</p><h5 id="删除报错IP对应的公钥信息"><a href="#删除报错IP对应的公钥信息" class="headerlink" title="删除报错IP对应的公钥信息"></a>删除报错IP对应的公钥信息</h5><p>使用<code>ssh-keygen</code>删除IP对应的公钥信息：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -R [127.0.0.1]:2345</span><br></pre></td></tr></table></figure><p>输出如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">benwangdeMacBook-Pro:~ benwang$ ssh-keygen -R [127.0.0.1]:2345</span><br><span class="line"># Host [127.0.0.1]:2345 found: line 15</span><br><span class="line">/Users/benwangliu/.ssh/known_hosts updated.</span><br><span class="line">Original contents retained as /Users/benwangliu/.ssh/known_hosts.old</span><br></pre></td></tr></table></figure><p>至此就完成了！重新使用SSH连接即可！</p><blockquote><p>注意：以上报错的是<code>[127.0.0.1]:2345</code>，所以删除该IP对应的公钥信息，要写完整；如果报错的只有IP没有端口号，则改为IP即可(只有IP则端口号默认为22)，以下命令可以查看所有的公钥信息。</p></blockquote><h5 id="查看本机所有的公钥信息"><a href="#查看本机所有的公钥信息" class="headerlink" title="查看本机所有的公钥信息"></a>查看本机所有的公钥信息</h5><p>命令如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/known_hosts</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在终端上使用SSH连接虚拟机报错内容如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;benwangdeMacBook-Pro:~ benwang$ ssh benco@127.0.0.1 -p 2345&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Someone could be eavesdropping on you right now (man-in-the-middle attack)!&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;It is also possible that a host key has just been changed.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;The fingerprint for the ECDSA key sent by the remote host is&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;SHA256:TPfOSnsIWZqjiPST/yWJOhR1h+eP0VHBqqsgTbb9RH0.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Please contact your system administrator.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Add correct host key in /Users/benwangliu/.ssh/known_hosts to get rid of this message.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Offending ECDSA key in /Users/benwangliu/.ssh/known_hosts:15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ECDSA host key for [127.0.0.1]:2345 has changed and you have requested strict checking.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Host key verification failed.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;benwangdeMacBook-Pro:~ benwang$&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="SSH" scheme="https://liubenwang.github.io/categories/SSH/"/>
+    
+    
+      <category term="SSH" scheme="https://liubenwang.github.io/tags/SSH/"/>
+    
+      <category term="Error" scheme="https://liubenwang.github.io/tags/Error/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在MacOS上搭建Linux虚拟环境</title>
+    <link href="https://liubenwang.github.io/2018/06/11/linux-environment/"/>
+    <id>https://liubenwang.github.io/2018/06/11/linux-environment/</id>
+    <published>2018-06-11T07:48:34.000Z</published>
+    <updated>2018-06-14T08:23:11.964Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用工具罗列：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">VirtualBox</span><br><span class="line">Ubuntu 16.04.4</span><br></pre></td></tr></table></figure><h4 id="安装VirtualBox"><a href="#安装VirtualBox" class="headerlink" title="安装VirtualBox"></a>安装VirtualBox</h4><p><a href="https://www.virtualbox.org/" target="_blank" rel="noopener"><strong>VirtualBox</strong></a>是一个免费的虚拟机软件，可以在Windows、MacOS创建本地虚拟环境，本文是使用VirtualBox安装Ubuntu虚拟环境。</p><p>Mac环境下安装VirtualBox比较简单，下一步下一步即可，在此不多介绍，安装好的效果如下：</p><a id="more"></a><p><img src="00.png" alt=""></p><h4 id="下载Ubuntu-16-04服务器版"><a href="#下载Ubuntu-16-04服务器版" class="headerlink" title="下载Ubuntu 16.04服务器版"></a>下载Ubuntu 16.04服务器版</h4><p><a href="http://cn.ubuntu.com/" target="_blank" rel="noopener"><strong>Ubuntu</strong></a>是开源的Linux操作系统，本文使用的是Ubuntu-16.04.4的64位服务器版，图文也是基于该版本写的，请自行下载16.04版本。</p><h4 id="使用VirtualBox新建虚拟机"><a href="#使用VirtualBox新建虚拟机" class="headerlink" title="使用VirtualBox新建虚拟机"></a>使用VirtualBox新建虚拟机</h4><p>1.如下图所示，新建一个虚拟机，点击【新建】出现以下界面，输入虚拟机名称，点击【继续】</p><p><img src="01.png" alt=""></p><p>2.分配虚拟内存，这里默认选中1024即可，点击【继续】</p><p><img src="02.png" alt=""></p><p>3.创建虚拟硬盘，选中【现在创建虚拟硬盘】</p><p><img src="03.png" alt=""></p><p>4.设置虚拟硬盘文件类型，这里选中【VDI(VirtualBox磁盘映像)】</p><p><img src="04.png" alt=""></p><p>5.选中【动态分配】</p><p><img src="05.png" alt=""></p><p>6.设置创建文件位置，这里默认即可，点击【创建】即可</p><p><img src="06.png" alt=""></p><p>7.选中创建的虚拟机，点击【设置】</p><p><img src="07.png" alt=""></p><p>8.在【存储】中，点击添加按钮</p><p><img src="08.png" alt=""></p><p>9.【选择磁盘】后，选择下载的Ubuntu版本</p><p><img src="09.png" alt=""></p><p><img src="10.png" alt=""></p><p>10.选中创建的虚拟机，【启动】后开始虚拟机的配置。</p><p><img src="11.png" alt=""></p><h4 id="配置安装的虚拟机"><a href="#配置安装的虚拟机" class="headerlink" title="配置安装的虚拟机"></a>配置安装的虚拟机</h4><p>如下图进行配置即可，注意：这里只能用键盘操作，选中用空格键，切换用Tab键，确定用Enter键。<br><img src="12.png" alt=""><br><img src="13.png" alt=""><br><img src="14.png" alt=""><br><img src="15.png" alt=""><br><img src="16.png" alt=""><br><img src="17.png" alt=""><br><img src="18.png" alt=""><br><img src="19.png" alt=""><br><img src="20.png" alt=""><br><img src="21.png" alt=""><br><img src="22.png" alt=""><br><img src="23.png" alt=""><br><img src="24.png" alt=""><br><img src="25.png" alt=""><br><img src="26.png" alt=""><br><img src="27.png" alt=""><br><img src="28.png" alt=""><br><img src="29.png" alt=""><br><img src="30.png" alt=""><br><img src="31.png" alt=""><br><img src="32.png" alt=""><br><img src="33.png" alt=""><br><img src="34.png" alt=""><br><strong>注意：这里一定要选中【OpenSSH server】</strong><br><img src="35.png" alt=""><br><img src="36.png" alt=""><br><img src="37.png" alt=""><br><img src="38.png" alt=""><br><img src="39.png" alt=""><br><img src="40.png" alt=""><br>至此配置完成，可以使用自己设置的用户名和密码登录虚拟机。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用工具罗列：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;VirtualBox&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Ubuntu 16.04.4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;安装VirtualBox&quot;&gt;&lt;a href=&quot;#安装VirtualBox&quot; class=&quot;headerlink&quot; title=&quot;安装VirtualBox&quot;&gt;&lt;/a&gt;安装VirtualBox&lt;/h4&gt;&lt;p&gt;&lt;a href=&quot;https://www.virtualbox.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;strong&gt;VirtualBox&lt;/strong&gt;&lt;/a&gt;是一个免费的虚拟机软件，可以在Windows、MacOS创建本地虚拟环境，本文是使用VirtualBox安装Ubuntu虚拟环境。&lt;/p&gt;
+&lt;p&gt;Mac环境下安装VirtualBox比较简单，下一步下一步即可，在此不多介绍，安装好的效果如下：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="https://liubenwang.github.io/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="https://liubenwang.github.io/tags/Linux/"/>
+    
+      <category term="Environment" scheme="https://liubenwang.github.io/tags/Environment/"/>
+    
+  </entry>
   
   <entry>
     <title>使用终端解压Rar文件</title>
