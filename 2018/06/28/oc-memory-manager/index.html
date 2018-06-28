@@ -132,18 +132,17 @@
 
 
 
-<meta name="description" content="内存管理的思考方式: 自己生成并持有对象 非自己生成的对象，也可被持有 不再需要自己持有的对象时，需要释放 非自己持有的对象不能被释放  自己生成并持有对象1234567891011121314// MRCNSMutableArray *ms = [[NSMutableArray alloc] init];NSMutableArray *mms = [ms mutableCopy];id obj1">
 <meta name="keywords" content="Objective-C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="读书笔记：内存管理和引用计数">
 <meta property="og:url" content="https://blog.benwang.site/2018/06/28/oc-memory-manager/index.html">
 <meta property="og:site_name" content="benwang&#39;s blog">
-<meta property="og:description" content="内存管理的思考方式: 自己生成并持有对象 非自己生成的对象，也可被持有 不再需要自己持有的对象时，需要释放 非自己持有的对象不能被释放  自己生成并持有对象1234567891011121314// MRCNSMutableArray *ms = [[NSMutableArray alloc] init];NSMutableArray *mms = [ms mutableCopy];id obj1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-28T09:29:57.090Z">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530189704276&di=699f81c0d2adff0b1e4155d1086a01d3&imgtype=0&src=http%3A%2F%2Fwww.wahenzan.com%2Fuploads%2Fallimg%2F141207%2F1-14120G426004b.png">
+<meta property="og:updated_time" content="2018-06-28T09:53:59.292Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读书笔记：内存管理和引用计数">
-<meta name="twitter:description" content="内存管理的思考方式: 自己生成并持有对象 非自己生成的对象，也可被持有 不再需要自己持有的对象时，需要释放 非自己持有的对象不能被释放  自己生成并持有对象1234567891011121314// MRCNSMutableArray *ms = [[NSMutableArray alloc] init];NSMutableArray *mms = [ms mutableCopy];id obj1">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530189704276&di=699f81c0d2adff0b1e4155d1086a01d3&imgtype=0&src=http%3A%2F%2Fwww.wahenzan.com%2Fuploads%2Fallimg%2F141207%2F1-14120G426004b.png">
 
 
 
@@ -405,7 +404,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-06-28T17:29:57+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-06-28T17:53:59+08:00">
                 2018-06-28
               </time>
             
@@ -513,7 +512,9 @@
       
 
       
-        <h4 id="内存管理的思考方式"><a href="#内存管理的思考方式" class="headerlink" title="内存管理的思考方式:"></a>内存管理的思考方式:</h4><ol>
+        <p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1530189704276&amp;di=699f81c0d2adff0b1e4155d1086a01d3&amp;imgtype=0&amp;src=http%3A%2F%2Fwww.wahenzan.com%2Fuploads%2Fallimg%2F141207%2F1-14120G426004b.png" alt=""></p>
+<a id="more"></a>
+<h4 id="内存管理的思考方式"><a href="#内存管理的思考方式" class="headerlink" title="内存管理的思考方式:"></a>内存管理的思考方式:</h4><ol>
 <li>自己生成并持有对象</li>
 <li>非自己生成的对象，也可被持有</li>
 <li>不再需要自己持有的对象时，需要释放</li>
