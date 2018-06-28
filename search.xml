@@ -3,6 +3,27 @@
   
     
     <entry>
+      <title>Mac下修改文件夹的多语言设置</title>
+      <link href="/2018/06/28/mac-tips-folder/"/>
+      <url>/2018/06/28/mac-tips-folder/</url>
+      <content type="html"><![CDATA[<p>在Mac中，系统文件夹都有对应的中文和英文，即多语言设置，下面介绍在修改在系统语言设置为中文情况下的多语言设置。</p><a id="more"></a><h4 id="打开系统多语言文件夹"><a href="#打开系统多语言文件夹" class="headerlink" title="打开系统多语言文件夹"></a>打开系统多语言文件夹</h4><p>在终端上进行如下操作：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /System/Library/CoreServices/SystemFolderLocalizations/zh_CN.lproj </span><br><span class="line">open . # 打开当前文件夹</span><br></pre></td></tr></table></figure><p>打开文件夹后可以看到一个<strong>SystemFolderLocalizations.strings</strong>的文件，把这个文件拷贝到桌面后打开。</p><h4 id="转化语言文件转为json"><a href="#转化语言文件转为json" class="headerlink" title="转化语言文件转为json"></a>转化语言文件转为json</h4><p>如果打开后看到的是乱码，这是二进制文件，可以执行以下命令转化为json文件：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plutil -convert json SystemFolderLocalizations.strings</span><br></pre></td></tr></table></figure><p>转换后打开如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;Guest&quot;:&quot;客人&quot;,&quot;Drop Box&quot;:&quot;投件箱&quot;,&quot;Web Receipts&quot;:&quot;网页收据&quot;,&quot;Library&quot;:&quot;资源库&quot;,&quot;Local&quot;:&quot;本地&quot;.....&quot;Applications&quot;:&quot;应用程序&quot;&#125;</span><br></pre></td></tr></table></figure><h4 id="添加自定义文件名"><a href="#添加自定义文件名" class="headerlink" title="添加自定义文件名"></a>添加自定义文件名</h4><p>将自定义的文件名添加到语言文件中。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;Guest&quot;:&quot;客人&quot;,&quot;Drop Box&quot;:&quot;投件箱&quot;,&quot;Web Receipts&quot;:&quot;网页收据&quot;,&quot;Library&quot;:&quot;资源库&quot;,&quot;Local&quot;:&quot;本地&quot;.....&quot;Applications&quot;:&quot;应用程序&quot;,&quot;definefolder&quot;:&quot;自定义文件夹&quot;&#125;</span><br></pre></td></tr></table></figure><h4 id="转化语言文件为二进制文件"><a href="#转化语言文件为二进制文件" class="headerlink" title="转化语言文件为二进制文件"></a>转化语言文件为二进制文件</h4><p>执行如下命令恢复二进制文件：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plutil -convert binary1 SystemFolderLocalizations.strings</span><br></pre></td></tr></table></figure><h4 id="替换语言文件"><a href="#替换语言文件" class="headerlink" title="替换语言文件"></a>替换语言文件</h4><p>由于系统权限的问题，原语言文件被系统保护，不能直接修改，需要执行以下步骤：</p><p>1.重启电脑并按住<strong>command+R</strong>键，进入恢复模式。</p><p>2.在顶部菜单栏选择【工具】&gt;【终端】。</p><p>3.输入<strong>csrutil disable</strong>后重启电脑。</p><blockquote><p>注意：<code>csrutil disable</code>命令会关闭系统文件保护，建议在处理完语言文件后使用<code>csrutil enable</code>恢复系统文件保护。</p></blockquote><p>修改完权限后，用修改后的语言文件替换原语言文件</p><h4 id="添加-localized文件"><a href="#添加-localized文件" class="headerlink" title="添加.localized文件"></a>添加.localized文件</h4><p>打开自定义的文件，添加<strong>.localized</strong>文件，重启<strong>Finder</strong>即可看到效果，使用终端命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd 自定义文件</span><br><span class="line">touch .localized</span><br><span class="line">pkill Finder</span><br></pre></td></tr></table></figure>]]></content>
+      
+      <categories>
+          
+          <category> Mac </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Mac </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>使用SSH连接本地虚拟机</title>
       <link href="/2018/06/14/linux-ssh/"/>
       <url>/2018/06/14/linux-ssh/</url>
